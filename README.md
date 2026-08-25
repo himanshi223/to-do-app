@@ -1,2 +1,3 @@
-# webpack-configuration-template
-A template to use in personal projects with webpack configuration.
+# to-do-app
+
+A todo app with common features  to practice good design principles.
