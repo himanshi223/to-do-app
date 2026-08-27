@@ -1,7 +1,7 @@
 const todos = [];
 
 class todo{
-    constructor(project, title, description, dueDate, priority, notes, checklist){
+    constructor(title, description, dueDate, priority, notes, checklist, project){
         this.completed = false;
         this.project = project;
         this.title = title;
@@ -48,10 +48,15 @@ class todo{
 }
 
 export default function addTodo(todoDetails){
+    const id = crypto.randomUUID();
+    const todoItem = new todo(...todoDetails);
     todos.push({
-        id: crypto.randomUUID(),
-        todo : new todo([...todoDetails])
+        id,
+        todoItem
     });
+
+    console.log(todos);
+    localStorage.setItem(id, todoItem);
 }
 
 
