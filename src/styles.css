@@ -1,0 +1,54 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: pink;
+    display: grid;
+}
+
+dialog {
+    padding: 24px;
+    width: 60%;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 16px;
+    align-items: center;
+}
+
+form div{
+    width: 400px;
+    display: flex;
+    gap: 16px;
+}
+
+
+form div label{
+    width: 100px;
+    text-align: right;
+    text-transform: capitalize;
+}
+
+form div input, form div textarea {
+    width: 200px;
+}
+
+form button{
+    padding: 8px 16px;
+    text-transform: capitalize  ;
+}
+
+button {
+    padding: 8px 16px;
+}
+
