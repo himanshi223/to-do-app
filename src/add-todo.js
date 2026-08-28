@@ -1,7 +1,7 @@
 const todos = [];
 
 class todo{
-    constructor(title, description, dueDate, priority, notes, checklist, project){
+    constructor(title, description, dueDate, priority, notes, project){
         this.completed = false;
         this.project = project;
         this.title = title;
@@ -9,7 +9,6 @@ class todo{
         this.dueDate = dueDate;
         this.priority = priority;
         this.notes = notes;
-        this.checklist = checklist;
     }
 
     markDone(){
@@ -36,13 +35,9 @@ class todo{
         this.notes = notes;
     }
 
-    updateChecklist(checklist){
-        this.checklist = checklist;
-    }
-
     getDetails(){
         return {
-            project, title, description, dueDate, priority, notes, checklist
+            project, title, description, dueDate, priority, notes
         }
     }
 }
