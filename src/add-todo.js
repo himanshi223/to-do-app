@@ -1,7 +1,7 @@
 const todos = [];
 
 class todo{
-    constructor(title, description, dueDate, priority, notes, project){
+    constructor( project, priority, title, description, dueDate, notes){
         this.completed = false;
         this.project = project;
         this.title = title;
@@ -37,7 +37,7 @@ class todo{
 
     getDetails(){
         return {
-            project, title, description, dueDate, priority, notes
+            project, priority, title, description, dueDate, notes
         }
     }
 }

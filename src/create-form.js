@@ -1,13 +1,17 @@
 import addTodo from "./add-todo.js";
+import projects from "./projectManager.js";
 
 export default function createAddForm(){
     const dialog = document.querySelector("#add-task-dialog");
     const form = document.createElement("form");
     form.id = "add-task-form";
+    form.classList.add("add-form");
     let todo;
 
     const cancel = document.createElement("button");
     cancel.id = "cancel-add-form";
+    cancel.classList.add("cancel");
+    cancel.ariaLabel = "cancel";
     cancel.textContent = "X";
     cancel.addEventListener("click", (e)=>{
         e.preventDefault();
@@ -20,10 +24,14 @@ export default function createAddForm(){
 
     const addField = (field, type)=>{
         const fieldContainer = document.createElement("div");
+        fieldContainer.classList.add("container");
+        const fieldLabel = document.createElement("label");
+        fieldLabel.textContent = field;
+        fieldLabel.for = field;
         const fieldInput = document.createElement("input");
         fieldInput.id=field;
         fieldInput.type=type;
-        fieldInput.setAttribute("required",true);
+        fieldContainer.appendChild(fieldLabel);
         fieldContainer.appendChild(fieldInput);
         form.appendChild(fieldContainer);
         return fieldInput;
@@ -31,49 +39,79 @@ export default function createAddForm(){
 
     const addTextBox = (label)=>{
         const textBoxContainer = document.createElement("div");
+        textBoxContainer.classList.add("container");
+        const textBoxLabel = document.createElement("label");
+        textBoxLabel.textContent = label;
+        textBoxLabel.for = label;
         const textBox = document.createElement("textarea");
         textBox.id=label;
         textBox.resize = "none";
+        textBoxContainer.appendChild(textBoxLabel);
         textBoxContainer.appendChild(textBox);
         form.appendChild(textBoxContainer);
         return textBox;
     }
+    
+    const selectContainer = document.createElement("div");
+    selectContainer.classList = "select-container";
+
+    const projectContainer = document.createElement("div");
+    projectContainer.classList.add("container");
+    const projectLabel = document.createElement("label");
+    projectLabel.for = "project";
+    projectLabel.textContent = "Project";
+    const projectInput = document.createElement("select");
+    projectInput.id = "project";
+    const projectOptions = projects();
+    projectOptions.forEach((element,key)=>{
+        projectInput[key] = new Option(element,element);
+    })
+    projectContainer.appendChild(projectLabel);
+    projectContainer.appendChild(projectInput);
+    selectContainer.appendChild(projectContainer);
+    
 
     const priorityContainer = document.createElement("div");
-    priorityContainer.id = "priority-container";
+    priorityContainer.classList.add("container");
     const priorityLabel = document.createElement("label");
     priorityLabel.for = "priority";
     priorityLabel.textContent = "Priority";
     const priorityInput = document.createElement("select");
     priorityInput.id = "priority";
-    const options = ["low", "medium", "high"];
-    options.forEach((element, key)=>{
-        priorityInput[key] = new Option(element,key);
+    const priorityOptions = ["low", "medium", "high"];
+    priorityOptions.forEach((element, key)=>{
+        priorityInput[key] = new Option(element,element);
     })
     priorityContainer.appendChild(priorityLabel);
     priorityContainer.appendChild(priorityInput);
-    form.appendChild(priorityContainer);
+    selectContainer.appendChild(priorityContainer);
+
+    form.appendChild(selectContainer);
 
     const titleInput = addField("title", "text");
     titleInput.placeholder = "To do";
+    titleInput.setAttribute("required",true);
+
 
     const descriptionInput = addTextBox("description");
     descriptionInput.cols = 3;
-    descriptionInput.placeholder = "Description";
+    descriptionInput.placeholder = "Brief description...";
     descriptionInput.maxLength = 100;
 
+
     const dueDateInput = addField("due-date", "date");
+    dueDateInput.setAttribute("required",true);
     const dateLabel = document.createElement("label");
     dateLabel.for = "due-date";
     dateLabel.textContent = "Due By:"
 
     const notesInput = addTextBox("notes");
-    notesInput.placeholder = "Notes";
+    notesInput.placeholder = "Things to remember...";
 
     
     const submitButton = document.createElement("button");
     submitButton.id = "submit-add-form";
-    submitButton.classList.add("submit-button");
+    submitButton.classList.add("submit");
     submitButton.addEventListener("click",(e)=>{
         e.preventDefault();
         if(form.checkValidity()){
@@ -89,13 +127,14 @@ export default function createAddForm(){
     dialog.appendChild(form);
 
     function getDetails(){
+        const project = projectInput.selectedOptions[0].value;
+        const priority = priorityInput.selectedOptions[0].value;
         const title = titleInput.value;
         const description = descriptionInput.value;
-        const priority = priorityInput.value;
         const dueDate = dueDateInput.value;
         const notes = notesInput.value;
         dialog.close;
-        return([title, description, priority, dueDate, notes]);
+        return([project, priority, title, description, dueDate, notes]);
     }
 
 }
