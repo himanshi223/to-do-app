@@ -1,11 +1,12 @@
 import addTodo from "./add-todo.js";
-import projects from "./projectManager.js";
+import {getProjects} from "./projectManager.js";
 
 export default function createAddForm(){
     const dialog = document.querySelector("#add-task-dialog");
+    dialog.textContent = "";
     const form = document.createElement("form");
     form.id = "add-task-form";
-    form.classList.add("add-form");
+    form.classList.add("add-task-form");
     let todo;
 
     const cancel = document.createElement("button");
@@ -21,12 +22,11 @@ export default function createAddForm(){
 
     form.appendChild(cancel);
 
-
     const addField = (field, type)=>{
         const fieldContainer = document.createElement("div");
         fieldContainer.classList.add("container");
         const fieldLabel = document.createElement("label");
-        fieldLabel.textContent = field;
+        fieldLabel.textContent = field +"(required)";
         fieldLabel.for = field;
         const fieldInput = document.createElement("input");
         fieldInput.id=field;
@@ -62,7 +62,7 @@ export default function createAddForm(){
     projectLabel.textContent = "Project";
     const projectInput = document.createElement("select");
     projectInput.id = "project";
-    const projectOptions = projects();
+    const projectOptions = getProjects();
     projectOptions.forEach((element,key)=>{
         projectInput[key] = new Option(element,element);
     })

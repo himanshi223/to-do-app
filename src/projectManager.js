@@ -8,12 +8,14 @@ class Project{
 }
 
 function addNewProject(title, color){
+    if(!getProjects().includes(title) && title != ""){
     projects.push(new Project(title, color));
+}
 } 
 
 addNewProject("inbox", "white");
 
-export default function getProjects(){
+function getProjects(){
     const projectTitles = [];
     projects.forEach(project => {
         projectTitles.push(project.title);
@@ -21,4 +23,6 @@ export default function getProjects(){
     })
     return projectTitles;
 }
+
+export {addNewProject, getProjects};
 

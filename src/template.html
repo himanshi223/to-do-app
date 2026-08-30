@@ -12,11 +12,16 @@
     <header>
         <h1>TO DO LIST</h1>
     </header>
-    <div class="sidebar">
-        <nav>
-            <button id="all">All</button>
+    <aside class="sidebar">
+        <nav class="projects">
+            <button id="inbox" class="project">Inbox</button>
         </nav>
-    </div>
+        <form class="add-new">
+            <label for="add-new-project" class="sr-only">Add new project</label>
+            <input type="text" name="project-title" placeholder="new project" id="project-title" required/>
+            <button id="add-project-button">+</button>
+        </form>
+    </aside>
     <main>
         <div id="list"></div>
         <div id="add-new-task">
