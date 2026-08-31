@@ -64,7 +64,7 @@ export default function createAddForm(){
     projectInput.id = "project";
     const projectOptions = getProjects();
     projectOptions.forEach((element,key)=>{
-        projectInput[key] = new Option(element,element);
+        projectInput[key] = new Option(element.title,element.id);
     })
     projectContainer.appendChild(projectLabel);
     projectContainer.appendChild(projectInput);
@@ -134,7 +134,7 @@ export default function createAddForm(){
         const dueDate = dueDateInput.value;
         const notes = notesInput.value;
         dialog.close;
-        return([project, priority, title, description, dueDate, notes]);
+        return({project, priority, title, description, dueDate, notes});
     }
 
 }

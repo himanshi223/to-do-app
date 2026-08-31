@@ -1,28 +1,46 @@
-const projects = [];
-
 class Project{
     constructor(title,color){
         this.title = title;
         this.color = color;
+        this.todos = [];
     }
 }
 
-function addNewProject(title, color){
-    if(!getProjects().includes(title) && title != ""){
-    projects.push(new Project(title, color));
+let projects = {};
+function setProjects(){
+    if(localStorage.length<1)
+        addNewProject("index", "white");
+    projects = JSON.parse(localStorage.getItem("projects"));
 }
+
+function updateProjects(){
+    localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+function addNewProject(title, color){
+        const id = crypto.randomUUID();
+        const project = new Project(title, color);
+        projects[id] = project;
+        updateProjects();
 } 
 
-addNewProject("inbox", "white");
-
 function getProjects(){
-    const projectTitles = [];
-    projects.forEach(project => {
-        projectTitles.push(project.title);
-        console.log(projectTitles);
-    })
-    return projectTitles;
+    const projectItems = [];
+    setProjects();
+    for(let key in projects){
+        projectItems.push({key, title: projects[key].title})
+    }
+    return projectItems;
 }
 
-export {addNewProject, getProjects};
+function addNewTodo(projectId, todo){
+    projects[projectId].todos.push(todo);
+    updateProjects();
+}
+
+function getTodos(projectId) {
+    return projects[projectId].todos;
+}
+
+export {addNewProject, getProjects, addNewTodo, getTodos};
 

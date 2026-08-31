@@ -1,57 +1,59 @@
-const todos = [];
+import displayTodos from "./display-todos.js";
+import { getProjects, addNewTodo } from "./projectManager.js";
 
-class todo{
-    constructor( project, priority, title, description, dueDate, notes){
+class Todo{
+    constructor(details){
         this.completed = false;
-        this.project = project;
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.notes = notes;
+        this.project = details.project;
+        this.title = details.title;
+        this.description = details.description;
+        this.dueDate = details.dueDate;
+        this.priority = details.priority;
+        this.notes = details.notes;
     }
 
-    markDone(){
-        this.completed = true;
-    }
+    // markDone(){
+    //     this.completed = true;
+    // }
 
-    updateTitle(title){
-        this.title = title;
-    }
+    // updateTitle(title){
+    //     this.title = title;
+    // }
 
-    updateDescription(description){
-        this.description = description;
-    }
+    // updateDescription(description){
+    //     this.description = description;
+    // }
 
-    updateDueDate(dueDate){
-        this.dueDate = dueDate;
-    }
+    // updateDueDate(dueDate){
+    //     this.dueDate = dueDate;
+    // }
 
-    updatePriority(priority){
-        this.priority = priority;
-    }
+    // updatePriority(priority){
+    //     this.priority = priority;
+    // }
 
-    updateNotes(notes){
-        this.notes = notes;
-    }
+    // updateNotes(notes){
+    //     this.notes = notes;
+    // }
 
-    getDetails(){
-        return {
-            project, priority, title, description, dueDate, notes
-        }
-    }
+    // getDetails(){
+    //     return {
+    //         project, priority, title, description, dueDate, notes
+    //     }
+    // }
 }
 
 export default function addTodo(todoDetails){
     const id = crypto.randomUUID();
-    const todoItem = new todo(...todoDetails);
-    todos.push({
-        id,
-        todoItem
+    const projects = getProjects();
+    console.log("adding todo");
+    const index = projects.findIndex((project)=>{
+        return project.title == todoDetails.project
     });
-
-    console.log(todos);
-    localStorage.setItem(id, todoItem);
+    if(index!=-1){
+        addNewTodo(projects[index].key, new Todo(todoDetails));
+    }
+    displayTodos(project[index].key);
 }
 
 

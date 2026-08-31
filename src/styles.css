@@ -31,15 +31,22 @@ aside.sidebar{
     grid-row: 2/-1;
 }
 
-aside.sidebar nav{
+aside.sidebar nav, aside.sidebar form {
     padding: 4px;
+    margin-top: 6px;
     display: flex;
+}
+
+aside.sidebar nav{
     flex-flow: column wrap;
 }
 
-aside.sidebar form.add-new{
-    display: flex;
-    margin-top: 6px;
+aside.sidebar form>input{
+    flex: 1;
+}
+
+aside.sidebar nav>button {
+    text-transform: capitalize;
 }
 
 .sr-only {
@@ -61,6 +68,57 @@ aside.sidebar button, aside.sidebar form input{
     padding: 8px;
 }
 
+main {
+    background-color: lightgreen;
+}
+
+main .list {
+    height: 100%;
+    padding: 24px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+main .list .todo {
+    padding: 32px;
+}
+
+main .list .todo.low{
+    background-color: yellow;
+}
+
+main .list .todo.medium{
+    background-color: orange;
+}
+
+main .list .todo.high{
+    background-color: red;
+}
+
+main .list .todo{
+    display: flex;
+    justify-content: space-between;
+}
+
+main .list h3 {
+    font-size: 2rem;
+}
+
+main .list .todo .container {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 8px;
+}
+
+main #add-task-button{
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    border-radius: 100px;
+}
+
 button:focus {
     outline: 2px solid black;
 }
@@ -79,18 +137,19 @@ button {
 
 
 dialog {
-    padding: 8px;
-    margin: auto;
+    padding: 4px 16px;
+    margin: auto auto 0;
+    width: 60%;
 }
 
 .add-task-form {
+    padding: 24px;
     display: flex;
     flex-flow: column wrap;
     gap: 16px;
     align-items: center;
     justify-content: center;
 }
-
 
 .add-task-form button{
     font-size: 1.5rem;
@@ -108,8 +167,14 @@ dialog {
 
 .add-task-form .select-container {
     display: flex;
-    gap: 76px;
+    gap: 16px;
     justify-content: space-between;
+    width: 80%;
+}
+
+.add-task-form .select-container .container {
+    overflow: hidden;
+    flex: 1;
 }
 
 .add-task-form .container {
@@ -138,11 +203,7 @@ form label, form button {
     font-size: 1rem;
 }
 
-.add-task-form input, .add-task-form textarea {
-
-}
-
-.add-task-form textarea {
+textarea {
     resize: none;
     overflow: hidden;
 }
@@ -154,13 +215,13 @@ form label, form button {
     text-transform: capitalize;
 }
 
-
 form input:focus, form textarea:focus, form select:focus, form button:focus{
     outline: 1px solid #2c2a2a;
 }
 
 form input:user-invalid {
-
+    outline: 2px solid red;
 }
+
 
 
