@@ -46,11 +46,25 @@ aside.sidebar form>input{
     flex: 1;
 }
 
-aside.sidebar nav>button {
-    text-transform: capitalize;
+aside.sidebar nav>.button-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+aside.sidebar .button-container>button.project {
+    text-transform: capitalize;
+    flex: 1;
+}
+
+aside.sidebar nav button.selected {
+    background-color: rgb(145, 71, 145);
+    color: white;
+}
+
+aside.sidebar button.selected+button {
+    background-color: rgb(145, 71, 145);
+    color: white;
 }
 
 .sr-only {
@@ -72,6 +86,7 @@ aside.sidebar button, aside.sidebar form input{
     padding: 8px;
 }
 
+
 main {
     background-color: rgb(228, 204, 228);
 }
@@ -90,20 +105,24 @@ main .list .todo {
 }
 
 main .list .todo.low{
-    background-color: yellow;
+    background-color: rgb(255, 255, 182);
 }
 
 main .list .todo.medium{
-    background-color: orange;
+    background-color: rgb(255, 218, 149);
 }
 
 main .list .todo.high{
-    background-color: red;
+    background-color: rgb(255, 124, 124);
 }
 
 main .list .todo{
+    padding: 16px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
 }
 
 main .list h3 {
@@ -114,6 +133,14 @@ main .list .todo .container {
     display: flex;
     flex-flow: column wrap;
     gap: 8px;
+    text-transform: capitalize;
+}
+
+main .list .todo .container button {
+    font-size: 0.8rem;
+    background-color: transparent;
+    border: 0.5px solid black;
+    outline: 0.5px solid black;
 }
 
 main #add-task-button{

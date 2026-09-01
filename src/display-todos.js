@@ -2,12 +2,11 @@ import { getProjects, getTodos } from "./projectManager.js";
 
 export default function displayTodos(projectId) {
     const projects = getProjects();
-    if(!projectId)
-        projectId = projects[0].key;
 
     const todos = getTodos(projectId);
     const list = document.querySelector(".list");
     list.textContent = "";
+
     todos.forEach((todo)=>{
         const todoContainer = document.createElement("div");
         todoContainer.classList.add("todo");

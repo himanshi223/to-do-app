@@ -1,7 +1,7 @@
 import addTodo from "./add-todo.js";
 import {getProjects} from "./projectManager.js";
 
-export default function createAddForm(){
+export default function createAddForm(projectId){
     const dialog = document.querySelector("#add-task-dialog");
     dialog.textContent = "";
     const form = document.createElement("form");
@@ -65,6 +65,9 @@ export default function createAddForm(){
     const projectOptions = getProjects();
     projectOptions.forEach((element,key)=>{
         projectInput[key] = new Option(element.title,element.id);
+        console.log(projectId, element.key);
+        if(projectId === element.key)
+            projectInput.selectedIndex = key;
     })
     projectContainer.appendChild(projectLabel);
     projectContainer.appendChild(projectInput);

@@ -12,12 +12,21 @@ window.addEventListener("load",()=>{
     setProjects();
     renderProjects();
 
-    const tabs = document.querySelectorAll("nav>button.project");
+    //display todos of inbox by default
+    const projects = getProjects();
+    displayTodos(projects[0].key);
+
+    //set event listener for other projects
+    const tabs = document.querySelectorAll("nav button.project");
     console.log(tabs);
     tabs.forEach((tab)=>{
+        tab.classList.remove("selected");
         tab.addEventListener("click",(e)=>{
             console.log("clicked", e.target.dataset.id);
             displayTodos(e.target.dataset.id);
+            createAddForm(e.target.dataset.id);
+            tabs.forEach((tab)=>tab.classList.remove("selected"));
+            tab.classList.add("selected");
         })
     })
 });
