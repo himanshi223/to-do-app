@@ -34,12 +34,6 @@ export default function displayTodos(projectId) {
         details.addEventListener("click", displayDetails);
         buttonContainer.appendChild(details);
 
-        const edit = document.createElement("button");
-        edit.classList.add("edit");
-        edit.textContent = "Edit";
-        edit.addEventListener("click", editTodo);
-        buttonContainer.appendChild(edit);
-
         const remove = document.createElement("button");
         remove.classList.add("remove");
         remove.textContent = "Remove";
@@ -49,4 +43,12 @@ export default function displayTodos(projectId) {
         todoContainer.appendChild(buttonContainer);
         list.appendChild(todoContainer);
     })
+}
+
+function displayDetails(){
+
+}
+
+function removeTodo(){
+
 }

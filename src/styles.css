@@ -9,10 +9,10 @@ html {
 }
 
 body {
-    background-color: pink;
     display: grid;
     grid-template-rows: 1fr 6fr;
     grid-template-columns: 1fr 4fr;
+    gap: 8px;
     height: 100vh;
 }
 
@@ -22,11 +22,12 @@ header {
     text-align: center;
     display: flex;
     align-items: flex-end;
-    background-color: purple;
+    background-color: rgb(61, 21, 61);
+    color: white;
 }
 
 aside.sidebar{
-    background-color: cornsilk;
+    background-color: rgb(212, 139, 212);
     grid-column: 1/2;
     grid-row: 2/-1;
 }
@@ -47,6 +48,9 @@ aside.sidebar form>input{
 
 aside.sidebar nav>button {
     text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .sr-only {
@@ -69,7 +73,7 @@ aside.sidebar button, aside.sidebar form input{
 }
 
 main {
-    background-color: lightgreen;
+    background-color: rgb(228, 204, 228);
 }
 
 main .list {

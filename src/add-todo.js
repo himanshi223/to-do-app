@@ -4,7 +4,7 @@ import { getProjects, addNewTodo } from "./projectManager.js";
 class Todo{
     constructor(details){
         this.completed = false;
-        this.project = details.project;
+        this.project = "all" || details.project;
         this.title = details.title;
         this.description = details.description;
         this.dueDate = details.dueDate;
