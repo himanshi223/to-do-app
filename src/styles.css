@@ -116,17 +116,18 @@ main .list .todo.high{
     background-color: rgb(255, 124, 124);
 }
 
+main .list .todo.completed {
+    background-color: rgb(206, 190, 190);
+}
+
+
 main .list .todo{
-    padding: 16px;
+    padding: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 8px;
     border-radius: 10px;
-}
-
-main .list h3 {
-    font-size: 2rem;
 }
 
 main .list .todo .container {
@@ -135,6 +136,22 @@ main .list .todo .container {
     gap: 8px;
     text-transform: capitalize;
 }
+
+main .todo .container.details {
+    align-self: stretch;
+}
+
+main .list input[type = "checkbox"]{
+    align-self: flex-start;
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+}
+
+main .list h3 {
+    font-size: 2rem;
+}
+
 
 main .list .todo .container button {
     font-size: 0.8rem;

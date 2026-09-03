@@ -1,4 +1,6 @@
+import { addMethodsToTodo } from "./add-todo.js";
 import renderProjects from "./display-projects.js";
+import displayTodos from "./display-todos.js";
 
 class Project{
     constructor(title,color){
@@ -16,6 +18,10 @@ function setProjects(){
         addNewProject("inbox", "white");
     }
     projects = JSON.parse(localStorage.getItem("projects"));
+
+    for(let projectId in projects){
+        projects[projectId].todos.forEach(todo=>addMethodsToTodo(todo));
+    }
 }
 
 function updateProjects(){
@@ -46,6 +52,12 @@ function addNewTodo(projectId, todo){
     updateProjects();
 }
 
+function deleteTodo(projectId, todoId){
+    const todos = projects[projectId].todos;
+    const index = todos.findIndex((todo)=>todo.id === todoId);
+    projects[projectId].todos.splice(index, 1);
+}
+
 function getTodos(projectId) {
     return projects[projectId].todos;
 }
@@ -65,5 +77,5 @@ function getProjectsTitles(){
     return projectTitles;
 }
 
-export { setProjects, addNewProject, getProjects, addNewTodo, getTodos, removeProject};
+export { setProjects, addNewProject, getProjects, addNewTodo, deleteTodo, getTodos, removeProject};
 

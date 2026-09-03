@@ -1,5 +1,5 @@
 import "./styles.css";
-import todo from "./add-todo.js";
+import {addMethodsToTodo, addTodo} from "./add-todo.js";
 import createAddForm from "./create-form.js";
 import addForm from  "./add-form.js";
 import { setProjects, addNewProject, getProjects } from "./projectManager.js";

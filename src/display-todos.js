@@ -1,4 +1,4 @@
-import { getProjects, getTodos } from "./projectManager.js";
+import { deleteTodo, getProjects, getTodos } from "./projectManager.js";
 
 export default function displayTodos(projectId) {
     const projects = getProjects();
@@ -14,6 +14,32 @@ export default function displayTodos(projectId) {
 
         const detailsContainer = document.createElement("div");
         detailsContainer.classList.add("container");
+        detailsContainer.classList.add("details");
+
+        const label = document.createElement("label");
+        label.for = "complete-marker";
+        label.textContent = "Mark Complete";
+        label.classList.add("sr-only");
+        detailsContainer.appendChild(label);
+
+        const complete = document.createElement("input");
+        complete.type = "checkbox";
+        complete.classList.add = "complete";
+        complete.id = "complete-marker";
+        detailsContainer.appendChild(complete);
+
+        complete.addEventListener("change" , (e)=>{
+            todoContainer.classList.toggle("completed");
+            console.log(todo.complete);
+
+            if(todoContainer.classList.contains("completed")){
+                todo.markDone();
+                todoContainer.remove();
+                list.appendChild(todoContainer);
+            }
+        })
+
+
         const title = document.createElement("h3");
         title.textContent = todo.title;
         detailsContainer.appendChild(title);
@@ -36,7 +62,10 @@ export default function displayTodos(projectId) {
         const remove = document.createElement("button");
         remove.classList.add("remove");
         remove.textContent = "Remove";
-        remove.addEventListener("click", removeTodo);
+        remove.addEventListener("click", ()=>{
+            deleteTodo(projectId, todo.id);
+            displayTodos(projectId)
+        });
         buttonContainer.appendChild(remove);
 
         todoContainer.appendChild(buttonContainer);
@@ -44,10 +73,9 @@ export default function displayTodos(projectId) {
     })
 }
 
+
+
 function displayDetails(){
 
 }
 
-function removeTodo(){
-
-}

@@ -1,4 +1,4 @@
-import addTodo from "./add-todo.js";
+import { addTodo } from "./add-todo.js";
 import {getProjects} from "./projectManager.js";
 
 export default function createAddForm(projectId){
