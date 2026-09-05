@@ -1,5 +1,5 @@
 import { addMethodsToTodo } from "./add-todo.js";
-import renderProjects from "./display-projects.js";
+import {renderProjects} from "./display-projects.js";
 import displayTodos from "./display-todos.js";
 
 class Project{
@@ -35,7 +35,7 @@ function addNewProject(title, color){
     const project = new Project(title, color);
     projects[id] = project;
     updateProjects();
-    renderProjects();
+    renderProjects(id);
 } 
 
 function getProjects(){
