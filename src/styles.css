@@ -272,5 +272,13 @@ form input:user-invalid {
     outline: 2px solid red;
 }
 
+form input:required {
+    background-color: hsl(0, 100%, 94%);
+}
+
+label.required {
+    color: rgba(187, 0, 0, 0.973);
+}
+
 
 

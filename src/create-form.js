@@ -27,15 +27,20 @@ export default function createAddForm(projectId){
         const fieldContainer = document.createElement("div");
         fieldContainer.classList.add("container");
         const fieldLabel = document.createElement("label");
-        fieldLabel.textContent = field +"(required)";
+        fieldLabel.textContent = field;
         fieldLabel.htmlFor = field;
         const fieldInput = document.createElement("input");
         fieldInput.id=field;
         fieldInput.type=type;
+        fieldInput.addEventListener("keydown",e=>{
+            if(e.key === "Enter"){
+                e.preventDefault();
+            }
+        });
         fieldContainer.appendChild(fieldLabel);
         fieldContainer.appendChild(fieldInput);
         form.appendChild(fieldContainer);
-        return fieldInput;
+        return fieldContainer;
     }
 
     const addTextBox = (label)=>{
@@ -93,10 +98,13 @@ export default function createAddForm(projectId){
 
     form.appendChild(selectContainer);
 
-    const titleInput = addField("title", "text");
+    const title = addField("title", "text");
+    const titleInput = title.children[1];
     titleInput.placeholder = "To do";
     titleInput.setAttribute("required",true);
-
+    const titleLabel = title.childNodes[0];
+    titleLabel.textContent += "(required)";
+    titleLabel.classList.add("required");
 
     const descriptionInput = addTextBox("description");
     descriptionInput.cols = 3;
@@ -104,11 +112,12 @@ export default function createAddForm(projectId){
     descriptionInput.maxLength = 100;
 
 
-    const dueDateInput = addField("due-date", "date");
+    const dueDate = addField("due-date", "date");
+    const dueDateInput = dueDate.children[1];
     dueDateInput.setAttribute("required",true);
-    const dateLabel = document.createElement("label");
-    dateLabel.for = "due-date";
-    dateLabel.textContent = "Due By:"
+    const dueDateLabel = dueDate.children[0];
+    dueDateLabel.textContent += "(required)"
+    dueDateLabel.classList.add("required");
 
     const notesInput = addTextBox("notes");
     notesInput.placeholder = "Things to remember...";

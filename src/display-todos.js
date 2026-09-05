@@ -33,7 +33,6 @@ export default function displayTodos(projectId) {
             console.log(todo.complete);
 
             if(todoContainer.classList.contains("completed")){
-                todo.markDone();
                 todoContainer.remove();
                 list.appendChild(todoContainer);
             }
