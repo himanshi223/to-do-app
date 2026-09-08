@@ -1,6 +1,8 @@
 import { getProjects, getTodos } from "./projectManager.js";
 import deleteTodo from "./delete-todo.js";
 import { getTodo } from "./add-todo.js";
+import {createAddForm, createEditForm} from "./create-form.js";
+import displayForm from "./display-form.js";
 
 export default function displayTodos(projectId) {
     const projects = getProjects();
@@ -138,6 +140,8 @@ function displayDetails(todoId){
     editButton.addEventListener("click", ()=>{
         dialog.textContent = "";
         dialog.close();
+        createEditForm(todoId);
+        displayForm();
     })
     buttonsContainer.appendChild(editButton);
 

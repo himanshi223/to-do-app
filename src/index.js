@@ -1,7 +1,7 @@
 import "./styles.css";
 import {addMethodsToTodo, addTodo, downloadTodos} from "./add-todo.js";
-import createAddForm from "./create-form.js";
-import addForm from  "./add-form.js";
+import {createAddForm} from "./create-form.js";
+import addForm from  "./display-form.js";
 import { setProjects, addNewProject, getProjects } from "./projectManager.js";
 import {renderProjects, select} from "./display-projects.js";
 import displayTodos from "./display-todos.js";

@@ -1,27 +1,11 @@
-import { addTodo } from "./add-todo.js";
+import { addTodo, getTodo } from "./add-todo.js";
 import { getProjects } from "./projectManager.js";
 
-export default function createAddForm(projectId){
-    const dialog = document.querySelector("#add-task-dialog");
-    dialog.textContent = "";
-
+function createForm(){
     const form = document.createElement("form");
     form.id = "add-task-form";
     form.classList.add("add-task-form");
     let todo;
-
-    const cancel = document.createElement("button");
-    cancel.id = "cancel-add-form";
-    cancel.classList.add("cancel");
-    cancel.ariaLabel = "cancel";
-    cancel.textContent = "X";
-    cancel.addEventListener("click", (e)=>{
-        e.preventDefault();
-        form.reset();
-        dialog.close();
-    })
-
-    form.appendChild(cancel);
 
     const addField = (field, type)=>{
         const fieldContainer = document.createElement("div");
@@ -69,13 +53,6 @@ export default function createAddForm(projectId){
     const projectInput = document.createElement("select");
     projectInput.id = "project";
 
-    const projectOptions = getProjects();
-    projectOptions.forEach((element,key)=>{
-        projectInput[key] = new Option(element.title,element.id);
-        if(projectId === element.key)
-            projectInput.selectedIndex = key;
-        console.log(projectInput.selectedIndex, projectId, element.key)
-    })
     projectContainer.appendChild(projectLabel);
     projectContainer.appendChild(projectInput);
     selectContainer.appendChild(projectContainer);
@@ -138,7 +115,7 @@ export default function createAddForm(projectId){
     submitButton.textContent = "Done";
 
     form.appendChild(submitButton);
-    dialog.appendChild(form);
+    return form;
 
     function getDetails(){
         const project = projectInput.selectedOptions[0].value;
@@ -152,3 +129,41 @@ export default function createAddForm(projectId){
     }
 
 }
+
+function createAddForm(projectId){
+    const form = createForm();
+    const projectInput = form.querySelector("#project");
+    const projectOptions = getProjects();
+    projectOptions.forEach((element,key)=>{
+        projectInput[key] = new Option(element.title,element.id);
+        if(projectId === element.key)
+            projectInput.selectedIndex = key;
+        console.log(projectInput.selectedIndex, projectId, element.key)
+    })
+
+    const dialog = document.querySelector("#add-task-dialog");
+    dialog.textContent = "";
+
+    const cancel = document.createElement("button");
+    cancel.id = "cancel-add-form";
+    cancel.classList.add("cancel");
+    cancel.ariaLabel = "cancel";
+    cancel.textContent = "X";
+    cancel.addEventListener("click", (e)=>{
+        e.preventDefault();
+        form.reset();
+        dialog.close();
+    })
+    dialog.appendChild(cancel);
+
+    dialog.appendChild(form);
+    
+}
+
+function createEditForm(todoId){
+    const dialog = document.querySelector("#add-task-dialog");
+    dialog.textContent = "";
+}
+
+
+export {createAddForm, createEditForm};

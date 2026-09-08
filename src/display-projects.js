@@ -1,6 +1,6 @@
 import { getProjects, removeProject } from "./projectManager.js";
 import displayTodos from "./display-todos.js";
-import createAddForm from "./create-form.js";
+import {createAddForm} from "./create-form.js";
 
 
 function renderProjects(id){
