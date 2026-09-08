@@ -1,9 +1,13 @@
-import { deleteTodo, getProjects, getTodos } from "./projectManager.js";
+import { getProjects, getTodos } from "./projectManager.js";
+import deleteTodo from "./delete-todo.js";
+import { getTodo } from "./add-todo.js";
 
 export default function displayTodos(projectId) {
     const projects = getProjects();
 
-    const todos = getTodos(projectId);
+    const todoIds = getTodos(projectId);
+    const todos = todoIds.map((todoId)=>getTodo(todoId));
+    console.log(todos);
     const list = document.querySelector(".list");
     list.textContent = "";
 
@@ -11,6 +15,7 @@ export default function displayTodos(projectId) {
         const todoContainer = document.createElement("div");
         todoContainer.classList.add("todo");
         todoContainer.classList.add(todo.priority);
+        todoContainer.dataset.id = todo.id;
 
         const detailsContainer = document.createElement("div");
         detailsContainer.classList.add("container");
@@ -30,7 +35,6 @@ export default function displayTodos(projectId) {
 
         complete.addEventListener("change" , (e)=>{
             todoContainer.classList.toggle("completed");
-            console.log(todo.complete);
 
             if(todoContainer.classList.contains("completed")){
                 todoContainer.remove();
@@ -50,12 +54,12 @@ export default function displayTodos(projectId) {
         todoContainer.appendChild(detailsContainer);
 
         const buttonContainer = document.createElement("div");
-        buttonContainer.classList.add("container");
+        buttonContainer.classList.add("button-container");
 
         const details = document.createElement("button");
         details.classList.add("details");
         details.textContent = "Details";
-        details.addEventListener("click", displayDetails);
+        details.addEventListener("click",()=> displayDetails(todo.id));
         buttonContainer.appendChild(details);
 
         const remove = document.createElement("button");
@@ -74,7 +78,71 @@ export default function displayTodos(projectId) {
 
 
 
-function displayDetails(){
+function displayDetails(todoId){
+    const todo = getTodo(todoId);
+    console.log(todo);
 
+    const dialog = document.querySelector(".details-dialog")
+
+    const details = document.createElement("div");
+    details.classList.add("details-container");
+
+    const title = document.createElement("h4");
+    title.classList.add("title");
+    title.textContent = todo.title;
+    details.appendChild(title);
+
+    const status = document.createElement("p");
+    status.textContent = todo.complete ? "Completed" : "Not completed"
+    details.appendChild(status);
+
+    const priority = document.createElement("p");
+    if(todo.priority == "high")
+        priority.textContent = "High Priority Task";
+    else if(todo.priority == "medium")
+        priority.textContent = "Medium Priority Task";
+    else 
+        priority.textContent = "Low Priority Task";
+    details.appendChild(priority);
+
+    const description = document.createElement("p");
+    description.classList.add("description");
+    description.textContent = "Description: " + todo.description;
+    details.appendChild(description);
+
+    const dueDate = document.createElement("p");
+    dueDate.textContent = "Due by: " ;
+    details.appendChild(dueDate);
+
+    const notes = document.createElement("p");
+    notes.textContent = "Notes: " + todo.notes;
+    details.appendChild(notes);
+
+    const project = document.createElement("p");
+    project.textContent = "Project: " + todo.project;
+    details.appendChild(project);
+
+    const buttonsContainer = document.createElement("div");
+    buttonsContainer.classList.add("buttons-container");
+
+    const closeButton = document.createElement("button");
+    closeButton.textContent = "Close";
+    closeButton.addEventListener("click", ()=>{
+        dialog.textContent = "";
+        dialog.close();
+    })
+    buttonsContainer.appendChild(closeButton);
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", ()=>{
+        dialog.textContent = "";
+        dialog.close();
+    })
+    buttonsContainer.appendChild(editButton);
+
+    dialog.appendChild(details);
+    dialog.appendChild(buttonsContainer);
+    dialog.showModal();
 }
 

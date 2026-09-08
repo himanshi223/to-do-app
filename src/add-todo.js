@@ -1,6 +1,8 @@
 import displayTodos from "./display-todos.js";
 import { getProjects, addNewTodo } from "./projectManager.js";
 
+let todos = [];
+
 class Todo{
     constructor(details){
         this.id = crypto.randomUUID();
@@ -50,22 +52,43 @@ class TodoMethods {
 }
 
 function addTodo(todoDetails){
-    const id = crypto.randomUUID();
     const projects = getProjects();
     console.log("adding todo");
     const index = projects.findIndex((project)=>{
         return project.title == todoDetails.project
     });
-    if(index!=-1){
-        addNewTodo(projects[index].key, new Todo(todoDetails));
+        const todo = new Todo(todoDetails);
+        todos.push(todo);
+        uploadTodos();
+        addNewTodo(projects[index].key, todo.id);
         displayTodos(projects[index].key); 
-    }
+}
+
+function removeTodo(id){
+    const index = todos.findIndex((todo)=>todo.id == id);
+    todos.splice(index, 1);
+    uploadTodos();
+    console.log(todos);
+}
+
+function getTodo(id){
+    console.log(id);
+    return todos.find((todo)=>todo.id === id);
+}
+
+function uploadTodos(){
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function downloadTodos(){
+    todos = JSON.parse(localStorage.getItem("todos"));
+    console.log(todos);
 }
 
 function addMethodsToTodo(todo){
     Object.setPrototypeOf(Todo, TodoMethods);
 }
 
-export {addTodo, addMethodsToTodo};
+export {addTodo, addMethodsToTodo, downloadTodos, getTodo, removeTodo};
 
 

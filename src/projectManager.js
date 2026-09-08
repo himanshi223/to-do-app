@@ -47,14 +47,14 @@ function getProjects(){
     return projectItems;
 }
 
-function addNewTodo(projectId, todo){
-    projects[projectId].todos.push(todo);
+function addNewTodo(projectId, todoId){
+    projects[projectId].todos.push(todoId);
     updateProjects();
 }
 
-function deleteTodo(projectId, todoId){
+function removeTodoId(projectId, todoId){
     const todos = projects[projectId].todos;
-    const index = todos.findIndex((todo)=>todo.id === todoId);
+    const index = todos.findIndex((id)=>id === todoId);
     projects[projectId].todos.splice(index, 1);
 }
 
@@ -77,5 +77,5 @@ function getProjectsTitles(){
     return projectTitles;
 }
 
-export { setProjects, addNewProject, getProjects, addNewTodo, deleteTodo, getTodos, removeProject};
+export { setProjects, addNewProject, getProjects, addNewTodo, removeTodoId, getTodos, removeProject};
 

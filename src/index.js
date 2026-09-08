@@ -1,5 +1,5 @@
 import "./styles.css";
-import {addMethodsToTodo, addTodo} from "./add-todo.js";
+import {addMethodsToTodo, addTodo, downloadTodos} from "./add-todo.js";
 import createAddForm from "./create-form.js";
 import addForm from  "./add-form.js";
 import { setProjects, addNewProject, getProjects } from "./projectManager.js";
@@ -8,6 +8,7 @@ import displayTodos from "./display-todos.js";
 
 
 window.addEventListener("load",()=>{
+    downloadTodos();
     setProjects();
     renderProjects();
     const inbox = document.querySelector("nav .button-container");

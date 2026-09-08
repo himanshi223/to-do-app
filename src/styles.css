@@ -11,7 +11,7 @@ html {
 body {
     display: grid;
     grid-template-rows: 1fr 6fr;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: minmax(300px, 1fr) 6fr;
     gap: 8px;
     height: 100vh;
 }
@@ -98,33 +98,35 @@ main .list {
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(250px, 280px));
 }
 
 main .list .todo {
-    padding: 32px;
+    background-color: rgb(238, 221, 238);
 }
 
 main .list .todo.low{
-    background-color: rgb(255, 255, 182);
+    border-left: 10px solid rgb(228, 228, 120);
 }
 
 main .list .todo.medium{
-    background-color: rgb(255, 218, 149);
+    border-left: 10px solid rgb(223, 181, 105);
 }
 
 main .list .todo.high{
-    background-color: rgb(255, 124, 124);
+    border-left: 10px solid rgb(255, 98, 98);
 }
 
 main .list .todo.completed {
     background-color: rgb(206, 190, 190);
+    border-left: 10px solid rgb(165, 161, 161);
 }
 
 
 main .list .todo{
     padding: 32px;
     display: flex;
+    flex-flow: column wrap;
     justify-content: space-between;
     align-items: center;
     gap: 8px;
@@ -136,10 +138,14 @@ main .list .todo .container {
     flex-flow: column wrap;
     gap: 8px;
     text-transform: capitalize;
+    align-self: stretch;
 }
 
-main .todo .container.details {
-    align-self: stretch;
+
+main .todo .button-container {
+    display: flex;
+    gap: 8px;
+    padding: 8px;;
 }
 
 main .list input[type = "checkbox"]{
@@ -159,6 +165,33 @@ main .list .todo .container button {
     background-color: transparent;
     border: 0.5px solid black;
     outline: 0.5px solid black;
+}
+
+main dialog.details-dialog {
+    padding: 32px;
+    margin: auto;
+    max-width: 40vw;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+main dialog.details-dialog h4 {
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 8px 0;
+}
+
+main dialog.details-dialog p {
+    padding: 4px 0;
+    font-size: 1.2rem;
+}
+
+main dialog.details-dialog .buttons-container{
+    display: flex;
+    gap: 16px;
+    padding: 8px 0;
+    align-self: center;
 }
 
 main #add-task-button{
@@ -185,7 +218,7 @@ button {
 }
 
 
-dialog {
+dialog#add-task-dialog {
     padding: 4px 16px;
     margin: auto auto 0;
     width: 60%;
@@ -273,7 +306,7 @@ form input:user-invalid {
 }
 
 form input:required {
-    background-color: hsl(0, 100%, 94%);
+    background-color: rgb(255, 225, 225);
 }
 
 label.required {
