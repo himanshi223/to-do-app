@@ -1,6 +1,5 @@
 import { addMethodsToTodo } from "./add-todo.js";
 import {renderProjects} from "./display-projects.js";
-import displayTodos from "./display-todos.js";
 
 class Project{
     constructor(title,color){

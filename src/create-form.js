@@ -1,7 +1,9 @@
-import { addTodo, getTodo } from "./add-todo.js";
+import { addTodo } from "./add-todo.js";
 import { getProjects } from "./projectManager.js";
 
 function createForm(){
+    const dialog = document.querySelector("#add-task-dialog");
+    dialog.textContent = "";
     const form = document.createElement("form");
     form.id = "add-task-form";
     form.classList.add("add-task-form");
@@ -32,7 +34,7 @@ function createForm(){
         textBoxContainer.classList.add("container");
         const textBoxLabel = document.createElement("label");
         textBoxLabel.textContent = label;
-        textBoxLabel.for = label;
+        textBoxLabel.htmlFor = label;
         const textBox = document.createElement("textarea");
         textBox.id=label;
         textBox.resize = "none";
@@ -48,7 +50,7 @@ function createForm(){
     const projectContainer = document.createElement("div");
     projectContainer.classList.add("container");
     const projectLabel = document.createElement("label");
-    projectLabel.for = "project";
+    projectLabel.htmlFor = "project";
     projectLabel.textContent = "Project";
     const projectInput = document.createElement("select");
     projectInput.id = "project";
@@ -61,7 +63,7 @@ function createForm(){
     const priorityContainer = document.createElement("div");
     priorityContainer.classList.add("container");
     const priorityLabel = document.createElement("label");
-    priorityLabel.for = "priority";
+    priorityLabel.htmlFor = "priority";
     priorityLabel.textContent = "Priority";
     const priorityInput = document.createElement("select");
     priorityInput.id = "priority";
@@ -160,7 +162,7 @@ function createAddForm(projectId){
     
 }
 
-function createEditForm(todoId){
+function createEditForm(){
     const dialog = document.querySelector("#add-task-dialog");
     dialog.textContent = "";
 }

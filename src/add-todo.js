@@ -44,9 +44,7 @@ class TodoMethods {
     }
 
     getDetails(){
-        return {
-            project, priority, title, description, dueDate, notes
-        }
+        
     }
 
 }
@@ -86,7 +84,7 @@ function downloadTodos(){
 }
 
 function addMethodsToTodo(todo){
-    Object.setPrototypeOf(Todo, TodoMethods);
+    Object.setPrototypeOf(todo, TodoMethods);
 }
 
 export {addTodo, addMethodsToTodo, downloadTodos, getTodo, removeTodo};

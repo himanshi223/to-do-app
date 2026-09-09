@@ -1,11 +1,10 @@
-import { getProjects, getTodos } from "./projectManager.js";
+import {getTodos } from "./projectManager.js";
 import deleteTodo from "./delete-todo.js";
 import { getTodo } from "./add-todo.js";
-import {createAddForm, createEditForm} from "./create-form.js";
+import {createEditForm} from "./create-form.js";
 import displayForm from "./display-form.js";
 
 export default function displayTodos(projectId) {
-    const projects = getProjects();
 
     const todoIds = getTodos(projectId);
     const todos = todoIds.map((todoId)=>getTodo(todoId));
@@ -24,7 +23,7 @@ export default function displayTodos(projectId) {
         detailsContainer.classList.add("details");
 
         const label = document.createElement("label");
-        label.for = "complete-marker";
+        label.htmlFor = "complete-marker";
         label.textContent = "Mark Complete";
         label.classList.add("sr-only");
         detailsContainer.appendChild(label);
@@ -35,7 +34,7 @@ export default function displayTodos(projectId) {
         complete.id = "complete-marker";
         detailsContainer.appendChild(complete);
 
-        complete.addEventListener("change" , (e)=>{
+        complete.addEventListener("change" , ()=>{
             todoContainer.classList.toggle("completed");
 
             if(todoContainer.classList.contains("completed")){
