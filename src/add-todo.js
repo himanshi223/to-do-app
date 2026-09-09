@@ -3,6 +3,7 @@ import { getProjects, addNewTodo } from "./projectManager.js";
 
 let todos = [];
 
+
 class Todo{
     constructor(details){
         this.id = crypto.randomUUID();
@@ -50,6 +51,7 @@ class TodoMethods {
 }
 
 function addTodo(todoDetails){
+    downloadTodos();
     const projects = getProjects();
     console.log("adding todo");
     const index = projects.findIndex((project)=>{
@@ -70,7 +72,6 @@ function removeTodo(id){
 }
 
 function getTodo(id){
-    console.log(id);
     return todos.find((todo)=>todo.id === id);
 }
 
@@ -79,12 +80,15 @@ function uploadTodos(){
 }
 
 function downloadTodos(){
-    todos = JSON.parse(localStorage.getItem("todos"));
-    console.log(todos);
+    if(localStorage.getItem("todos")!== null){
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+    else 
+        todos = [];
 }
 
 function addMethodsToTodo(todo){
-    Object.setPrototypeOf(todo, TodoMethods);
+    Object.assign(todo, TodoMethods);
 }
 
 export {addTodo, addMethodsToTodo, downloadTodos, getTodo, removeTodo};
